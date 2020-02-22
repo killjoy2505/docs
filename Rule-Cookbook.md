@@ -1,4 +1,5 @@
 <a id="top"></a>
+- [Cheap 433 mhz emergency button with RF Bridge](#Cheap-433-mhz-emergency-button-with-RF-Bridge)
 - [Use long press action on a switch](#use-long-press-action-on-a-switch)
 - [Execute any MQTT message when a button is pressed](#execute-any-mqtt-message-when-a-button-is-pressed)
 - [Execute Several Commands when a Timer Expires](#execute-several-commands-when-a-timer-expires)
@@ -43,6 +44,28 @@
 - [Roller shutter push-button toggle](#roller-shutter-push-button-toggle)
 ------------------------------------------------------------------------------
 
+#### Cheap 433 mhz emergency button with RF Bridge
+
+After figuring out consumer grade SOS buttons for elderly people are really expensive and usually persuade you into taking an expensive subscription I decided I'd figure out how to make my own. It's less than 15 dollar.
+
+> [!NOTE]
+> This example requires you to compile your own tasmota.bin for your RF Bridge with #define USE_SENDMAIL
+
+This rule allows you to send an e-mail after having received a 433mhz signal on your RF Bridge. Gmail account must be set to "allow less secure apps"
+
+Example in console:
+```
+14:44:15 MQT: tele/rf/RESULT = {"Time":"2020-02-22T14:44:15","RfReceived":{"Sync":10230,"Low":350,"High":1010,"Data":"27ADA2","RfKey":"None"}}
+```
+Rule:
+```
+Rule1 on RFReceived#data=27ADA2 do sendmail [smtp.gmail.com:465:example@gmail.com:password:<example@gmail.com>:<example@gmail.com>:sos] SOS BREAK
+```
+
+
+[Back To Top](#top)
+
+------------------------------------------------------------------------------
 #### Use long press action on a switch
 
 > [!NOTE]
